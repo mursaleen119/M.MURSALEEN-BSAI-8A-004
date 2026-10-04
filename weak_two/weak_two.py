@@ -61,6 +61,9 @@ def make_bad_example(summary: pd.DataFrame) -> None:
     fig.savefig(OUTPUT_DIR / "bad_example.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
 
+    # This bad example follows the Week 2 principle that strong clutter and
+    # unnecessary labels raise cognitive load and reduce readability.
+
 
 def make_five_panel(summary: pd.DataFrame) -> None:
     fig, axes = plt.subplots(1, 5, figsize=(18, 4), sharey=True)
