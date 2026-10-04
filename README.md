@@ -9,9 +9,9 @@ This repository contains the completed weak tasks for the Data Visualization cou
 
 ## Weak Two — Week 2 Visual Perception
 
-This repository follows the official Week 2 visual-perception brief from the reference course repository: https://github.com/UsmarHaider/data-visualization
+This repository follows the official Week 2 visual-perception idea from the reference course repository: https://github.com/UsmarHaider/data-visualization
 
-The easiest dataset in the official assignment set has been used here: `tips.csv`.
+The easy dataset used here is `tips.csv`, which is the simplest dataset suited to the Week 2 cognitive-load and data-ink task.
 
 ### Official Week 2 goal
 The assignment focuses on how the human brain processes visual information. The emphasis is on reducing cognitive load, removing extraneous marks, and improving the data-ink ratio so the real finding is easier for the reader to understand.
@@ -39,7 +39,7 @@ The project follows the Week 2 visual-perception idea of reducing cognitive load
 - `weak_two/outputs/five_panel.png` — de-cluttering process output
 - `weak_two/outputs/clean_example.png` — final clean chart output
 
-### Run the task
+### Run it
 
 ```bash
 python -m pip install -r requirements.txt
@@ -50,7 +50,9 @@ python weak_two/weak_two.py
 This repository follows the official Week 2 idea using the easy dataset `tips.csv` and is designed around the Week 2 principles of:
 
 - cognitive load
+- extraneous visual marks
 - data-ink ratio
-- clutter reduction
-- cleaner chart design
-- clearer visual communication
+- reducing noise in chart design
+- clearer communication through simpler encoding
+
+It stays within the part of the brief that is directly supported by the easy `tips.csv` example and avoids adding unsupported tasks beyond the official guidance.
