@@ -48,40 +48,69 @@ def load_datasaurus() -> pd.DataFrame:
     return pd.read_csv(local_file)
 
 
-def make_datasaurus_plot(df: pd.DataFrame) -> None:
-    fig, ax = plt.subplots(figsize=(11, 7))
+def compute_summary(df: pd.DataFrame) -> pd.DataFrame:
+    summary = (
+        df.groupby("dataset")
+        .apply(
+            lambda g: pd.Series(
+                {
+                    "mean_x": g["x"].mean(),
+                    "mean_y": g["y"].mean(),
+                    "std_x": g["x"].std(ddof=1),
+                    "std_y": g["y"].std(ddof=1),
+                    "corr_xy": g["x"].corr(g["y"]),
+                }
+            )
+        )
+        .reset_index()
+    )
+    return summary.sort_values("dataset").reset_index(drop=True)
 
-    palette = plt.get_cmap("tab10")
+
+def save_summary(summary: pd.DataFrame) -> None:
+    summary_path = OUTPUT_DIR / "weak_one_summary_table.csv"
+    summary.to_csv(summary_path, index=False)
+    print(f"Saved summary table to: {summary_path}")
+
+
+def make_datasaurus_grid(df: pd.DataFrame) -> None:
     datasets = sorted(df["dataset"].unique())
+    n = len(datasets)
+    ncols = 4
+    nrows = (n + ncols - 1) // ncols
+
+    fig, axes = plt.subplots(nrows, ncols, figsize=(16, 12), squeeze=False)
+    axes_flat = axes.flatten()
+
+    for ax in axes_flat:
+        ax.set_visible(False)
 
     for idx, dataset_name in enumerate(datasets):
+        ax = axes_flat[idx]
+        ax.set_visible(True)
         group = df[df["dataset"] == dataset_name]
-        ax.scatter(
-            group["x"],
-            group["y"],
-            s=18,
-            alpha=0.7,
-            color=palette(idx % 10),
-            edgecolors="none",
-            label=dataset_name,
-        )
+        ax.scatter(group["x"], group["y"], s=14, alpha=0.8, color="#4c78a8")
+        ax.set_title(dataset_name, fontsize=8)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_facecolor("#f7f7f7")
 
-    ax.set_title("The same summary statistics can hide very different shapes", fontsize=16, fontweight="bold")
-    ax.set_xlabel("x")
-    ax.set_ylabel("y")
-    ax.grid(False)
-    ax.legend(loc="best", title="Dataset", fontsize=8)
-    fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "weak_one_datasaurus.png", dpi=300, bbox_inches="tight")
+    fig.suptitle("Datasaurus: 13 datasets, near-identical summary statistics", fontsize=18, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.96])
+    fig.savefig(OUTPUT_DIR / "weak_one_datasaurus_grid.png", dpi=300, bbox_inches="tight")
     plt.close(fig)
 
 
 def main() -> None:
     df = load_datasaurus()
-    make_datasaurus_plot(df)
+    summary = compute_summary(df)
+    save_summary(summary)
+    make_datasaurus_grid(df)
+
     print("Loaded official Week 1 dataset from the UsmarHaider/data-visualization repo.")
-    print("This plot shows why visualization matters: datasets with similar summary statistics can look very different.")
-    print(f"Saved output to: {OUTPUT_DIR / 'weak_one_datasaurus.png'}")
+    print("This task follows the datasaurus assignment: compute summary statistics, then plot all 13 datasets to show why visualization matters.")
+    print(f"Saved summary table to: {OUTPUT_DIR / 'weak_one_summary_table.csv'}")
+    print(f"Saved grid plot to: {OUTPUT_DIR / 'weak_one_datasaurus_grid.png'}")
 
 
 if __name__ == "__main__":
