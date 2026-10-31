@@ -61,8 +61,19 @@ def record(task: str, finding: str, value: str | float | int) -> None:
 
 
 def export(fig: plt.Figure, name: str, note: str) -> None:
-    save_fig(fig, OUT / name, note)
+    path = chart_path(name)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    save_fig(fig, path, note)
     plt.close(fig)
+
+
+def chart_path(name: str) -> Path:
+    for week in (1, 2, 3):
+        if name.startswith(f"week{week}_"):
+            path = ROOT / f"weak-{week}" / "charts" / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            return path
+    return OUT / name
 
 
 def register(week: int, task: str, title: str, files: list[str], explanation: str) -> None:
@@ -79,7 +90,7 @@ def w1_t1(df: pd.DataFrame) -> None:
         mean_gdp_per_capita=("gdpPercap", "mean"),
         sd_gdp_per_capita=("gdpPercap", "std"),
     ).reset_index()
-    summary.to_csv(OUT / "week1_task1_continent_statistics.csv", index=False)
+    summary.to_csv(chart_path("week1_task1_continent_statistics.csv"), index=False)
     fig, ax = plt.subplots(figsize=(9, 6))
     for continent, group in latest.groupby("continent"):
         ax.scatter(group.gdpPercap, group.lifeExp, s=35, alpha=.72,
@@ -132,7 +143,7 @@ def w1_t2(df: pd.DataFrame) -> None:
     annual = df.groupby("year").gdpPercap.agg(
         richest="max", poorest="min").reset_index()
     annual["ratio"] = annual.richest / annual.poorest
-    annual.to_csv(OUT / "week1_task2_income_gap.csv", index=False)
+    annual.to_csv(chart_path("week1_task2_income_gap.csv"), index=False)
     fig, ax = plt.subplots(figsize=(9, 5))
     ax.plot(annual.year, annual.ratio, marker="o", color=PALETTE["highlight"])
     ax.set(title="The richest-to-poorest GDP-per-capita ratio fluctuated, not steadily narrowed",
@@ -176,7 +187,8 @@ def w1_t3(df: pd.DataFrame) -> None:
         continent: group.gdpPercap.corr(group.lifeExp)
         for continent, group in latest.groupby("continent")
     }, name="GDP-life expectancy correlation")
-    correlations.rename("GDP-life expectancy correlation").to_csv(OUT / "week1_task3_group_correlations.csv")
+    correlations.rename("GDP-life expectancy correlation").to_csv(
+        chart_path("week1_task3_group_correlations.csv"))
     record("Week 1 Task 3", "Pooled GDP/life expectancy correlation", float(pooled_r))
     register(1, "Task 3 — distributions and relationships", "Grouping changes the relationship we see",
              ["week1_task3_distribution.png", "week1_task3_relationship.png"],
@@ -255,7 +267,7 @@ def w1_t5(df: pd.DataFrame) -> None:
            "Gapminder is sampled every five years; weights use population; no exclusions.")
     register(1, "Task 5 — real time series", "Five-year observations show trend, not seasonality",
              ["week1_task5_time_series.png"],
-             "A line respects ordered years. Gapminder has six-year (not monthly) spacing, so it cannot identify within-year seasonality; that limitation is stated rather than imputed.")
+             "A line respects ordered years. Gapminder has five-year (not monthly) spacing, so it cannot identify within-year seasonality; that limitation is stated rather than imputed.")
 
 
 def w2_t1(df: pd.DataFrame) -> None:
@@ -576,10 +588,10 @@ def w3_a(df: pd.DataFrame) -> None:
         "Pooled association masks continent structure; use grouping and compare within-group patterns.",
     ]
     pd.DataFrame({"case": range(1, 10), "diagnosis": diagnostics}).to_csv(
-        OUT / "week3_partA_diagnoses.csv", index=False)
+        chart_path("week3_partA_diagnoses.csv"), index=False)
     fig, axes = plt.subplots(3, 3, figsize=(12, 9))
     for ax, filename, diagnosis in zip(axes.flat, files, diagnostics):
-        image = plt.imread(OUT / filename)
+        image = plt.imread(chart_path(filename))
         ax.imshow(image)
         ax.set_title(diagnosis[:48] + "...", fontsize=7)
         ax.set_axis_off()
@@ -609,7 +621,7 @@ def w3_b(df: pd.DataFrame) -> None:
         {"encoding": "Population bubble, area proportional", "data_effect": area_data,
          "graphic_effect": area_shown, "lie_factor": area_factor, "verdict": lie_verdict(area_factor)},
     ])
-    summary.to_csv(OUT / "week3_partB_lie_factor.csv", index=False)
+    summary.to_csv(chart_path("week3_partB_lie_factor.csv"), index=False)
     register(3, "Part B — Lie Factor", "Measured distortion differs from data change",
              [], f"Computed Lie Factors: truncated baseline {factor:.2f}; area-proportional population bubble {area_factor:.2f}. The common-axis dual-axis Lie Factor is undefined.")
     record("Week 3 Part B", "Lie Factor: truncated mean-life bar", factor)
@@ -639,7 +651,7 @@ def w3_c() -> None:
             pair = worst_pair(palette, kind=None if kind == "normal" else kind)
             records.append({"palette": name, "vision": kind, "slot_i": pair[0],
                             "slot_j": pair[1], "delta_e": pair[4]})
-    pd.DataFrame(records).to_csv(OUT / "week3_partC_palette_audit.csv", index=False)
+    pd.DataFrame(records).to_csv(chart_path("week3_partC_palette_audit.csv"), index=False)
     export(fig, "week3_partC_palette.png", "Colour vision simulations from course vizlib; swatches numbered.")
     register(3, "Part C — palette check", "Palette choices should survive colour-vision simulation",
              ["week3_partC_palette.png"],
@@ -690,9 +702,9 @@ def w3_e() -> None:
 
 **Redesign trade-off.** Grouping and highlighting reduce visual load but make within-group country paths less prominent. Direct labels avoid legend lookups but focus attention on selected countries only.
 """
-    (OUT / "week3_partE_justification.md").write_text(text, encoding="utf-8")
+    chart_path("week3_partE_justification.md").write_text(text, encoding="utf-8")
     register(3, "Part E — written justification", "Parameters, exclusions, and trade-offs are explicit",
-             [], "The written justification is saved in outputs/week3_partE_justification.md.")
+             [], "The written justification is saved in weak-3/charts/week3_partE_justification.md.")
 
 
 def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
@@ -704,7 +716,7 @@ def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
     search_sample = latest.sample(n=25, random_state=42).sort_values("country").reset_index(drop=True)
     target = search_sample.iloc[len(search_sample) // 2]
     records = []
-    print("Show outputs/week2_task1_preattentive.png. Tell the participant to find the orange mark.")
+    print(f"Show {chart_path('week2_task1_preattentive.png')}. Tell the participant to find the orange mark.")
     input("When the participant is ready to see the chart, press Enter to begin timing.")
     started = time.perf_counter()
     answer = input("Which country is the orange mark beside? ").strip()
@@ -712,7 +724,7 @@ def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
     records.append({"participant": participant, "task": "visual_search",
                     "response": answer, "correct": answer.casefold() == target.country.casefold(),
                     "response_ms": elapsed})
-    print("Show outputs/week2_task2_gestalt.png before asking the six grouping questions.")
+    print(f"Show {chart_path('week2_task2_gestalt.png')} before asking the six grouping questions.")
     for principle in ["proximity", "similarity", "enclosure", "closure", "continuity", "connection"]:
         response = input(f"Reader: how many groups do you see for {principle}? Enter integer: ").strip()
         if not response.isdigit():
@@ -720,7 +732,7 @@ def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
         records.append({"participant": participant, "task": f"gestalt_{principle}",
                         "response": int(response), "correct": None, "response_ms": None})
     for connectors in [True, False]:
-        print("Show outputs/week2_task2_connection_test.png and direct the reader to the "
+        print(f"Show {chart_path('week2_task2_connection_test.png')} and direct the reader to the "
               f"{'connected' if connectors else 'unconnected'} panel.")
         response = input(
             "How many groups does the reader see in the connection panel "
@@ -732,7 +744,7 @@ def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
                         "response": int(response), "correct": None, "response_ms": None})
     summary = latest.groupby("continent").gdpPercap.mean().sort_values(ascending=False)
     true_ratio = float(summary.iloc[1] / summary.iloc[0])
-    print("Show outputs/week2_task4_channels.png; ask the reader to compare the two largest "
+    print(f"Show {chart_path('week2_task4_channels.png')}; ask the reader to compare the two largest "
           "continent means in each panel.")
     for channel in ["length", "area"]:
         estimate = input(
@@ -747,7 +759,7 @@ def collect_human_results(df: pd.DataFrame) -> pd.DataFrame:
         records.append({"participant": participant, "task": f"channel_{channel}",
                         "response": percent, "correct": None,
                         "response_ms": None, "true_ratio": true_ratio})
-    print("Show outputs/week2_task5_redesign.png before asking for the reader's interpretation.")
+    print(f"Show {chart_path('week2_task5_redesign.png')} before asking for the reader's interpretation.")
     interpretation = input("Record the reader's exact one-sentence interpretation of the redesign: ")
     if not interpretation.strip():
         raise ValueError("The reader's verbatim interpretation cannot be empty.")
@@ -783,8 +795,34 @@ def run_all() -> None:
     w3_e()
     pd.DataFrame(FINDINGS).to_csv(OUT / "key_findings.csv", index=False)
     build_notebook()
-    print(f"Generated {len(TASKS)} weekly task sections; outputs saved to {OUT}.")
+    print(f"Generated {len(TASKS)} weekly task sections under their week folders.")
     print("Human studies remain pending. Call collect_human_results(load_data()) with a real participant.")
+
+
+def run_single_week(week: int) -> None:
+    global TASKS, FINDINGS
+    if week not in (1, 2, 3):
+        raise ValueError(f"Base coursework is available for Weeks 1–3, not Week {week}.")
+    TASKS, FINDINGS = [], []
+    df = load_data()
+    if week == 1:
+        w1_t1(df)
+        w1_t2(df)
+        w1_t3(df)
+        w1_t4(df)
+        w1_t5(df)
+    elif week == 2:
+        w2_t1(df)
+        w2_t2(df)
+        w2_t3(df)
+        w2_t4(df)
+        w2_t5(df)
+    else:
+        w3_a(df)
+        w3_b(df)
+        w3_c()
+        w3_d(df)
+        w3_e()
 
 
 def build_notebook() -> None:
@@ -827,7 +865,7 @@ def build_notebook() -> None:
                        f"### {task['title']}\n\n", f"{task['explanation']}\n"],
         })
         for filename in task["files"]:
-            path = OUT / filename
+            path = chart_path(filename)
             image = PILImage.open(path)
             image.thumbnail((1400, 1400), PILImage.Resampling.LANCZOS)
             buffer = BytesIO()
@@ -839,10 +877,10 @@ def build_notebook() -> None:
                     "data": {"image/png": encoded, "text/plain": ["<Figure>"]},
                     "metadata": {}, "output_type": "display_data",
                 }],
-                "source": [f"display(Image(filename=str(OUT / {filename!r})))\n"],
+                "source": [f"display(Image(filename=str(chart_path({filename!r}))))\n"],
             })
         if task["task"] == "Task 1 — summaries and shape":
-            summary_path = OUT / "week1_task1_continent_statistics.csv"
+            summary_path = chart_path("week1_task1_continent_statistics.csv")
             summary = pd.read_csv(summary_path).round(2)
             cells.append({
                 "cell_type": "code", "execution_count": 1, "metadata": {},
@@ -851,7 +889,7 @@ def build_notebook() -> None:
                              "text/plain": [summary.to_string(index=False)]},
                     "metadata": {}, "output_type": "display_data",
                 }],
-                "source": ["display(pd.read_csv(OUT / 'week1_task1_continent_statistics.csv'))\n"],
+                "source": ["display(pd.read_csv(chart_path('week1_task1_continent_statistics.csv')))\n"],
             })
     notebook = {
         "cells": cells,

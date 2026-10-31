@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><title>Gapminder interactive trends</title>
+<h1>Explore life expectancy by continent</h1>
+<label>Show continent <select id="group"><option value="all">All</option></select></label>
+<svg id="chart" viewBox="0 0 900 440" role="img" aria-label="Life expectancy over time"></svg>
+<p>Hover a point for its year and value. Select one continent to focus the comparison.</p>
+<script>
+const data = [{"year":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"lifeExp":[39.14,41.27,43.32,45.33,47.45,49.58,51.59,53.34,53.63,53.6,53.33,54.81],"continent":"Africa"},{"year":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"lifeExp":[53.28,55.96,58.4,60.41,62.39,64.39,66.23,68.09,69.57,71.15,72.42,73.61],"continent":"Americas"},{"year":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"lifeExp":[46.31,49.32,51.56,54.66,57.32,59.61,62.62,64.85,66.54,68.02,69.23,70.73],"continent":"Asia"},{"year":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"lifeExp":[64.41,66.7,68.54,69.74,70.78,71.94,72.81,73.64,74.44,75.51,76.7,77.65],"continent":"Europe"},{"year":[1952,1957,1962,1967,1972,1977,1982,1987,1992,1997,2002,2007],"lifeExp":[69.26,70.3,71.09,71.31,71.91,72.85,74.29,75.32,76.94,78.19,79.74,80.72],"continent":"Oceania"}], svg=document.getElementById('chart'), select=document.getElementById('group');
+const ns='http://www.w3.org/2000/svg', colors={Africa:'#009E73',Americas:'#CC79A7',Asia:'#0072B2',Europe:'#D55E00',Oceania:'#E69F00'};
+data.forEach(d=>{const o=document.createElement('option');o.value=d.continent;o.textContent=d.continent;select.append(o)});
+function draw(){svg.innerHTML='';const W=900,H=440,L=65,R=20,T=20,B=55,x0=1952,x1=2007,y0=20,y1=85;
+const X=x=>L+(x-x0)/(x1-x0)*(W-L-R),Y=y=>H-B-(y-y0)/(y1-y0)*(H-T-B);
+for(let y=20;y<=80;y+=10){const line=document.createElementNS(ns,'line');line.setAttribute('x1',L);line.setAttribute('x2',W-R);line.setAttribute('y1',Y(y));line.setAttribute('y2',Y(y));line.setAttribute('stroke','#ddd');svg.append(line)}
+data.filter(d=>select.value==='all'||d.continent===select.value).forEach(d=>{const p=document.createElementNS(ns,'polyline');p.setAttribute('fill','none');p.setAttribute('stroke',colors[d.continent]);p.setAttribute('stroke-width','2.5');p.setAttribute('points',d.year.map((v,i)=>`${X(v)},${Y(d.lifeExp[i])}`).join(' '));svg.append(p);
+d.year.forEach((v,i)=>{const c=document.createElementNS(ns,'circle');c.setAttribute('cx',X(v));c.setAttribute('cy',Y(d.lifeExp[i]));c.setAttribute('r','4');c.setAttribute('fill',colors[d.continent]);const t=document.createElementNS(ns,'title');t.textContent=`${d.continent}, ${v}: ${d.lifeExp[i]} years`;c.append(t);svg.append(c)})});
+}
+select.addEventListener('change',draw);draw();
+</script>

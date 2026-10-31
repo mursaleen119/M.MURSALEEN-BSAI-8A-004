@@ -1,0 +1,3 @@
+# Week 4 written justification
+
+The chosen temporal unit is the recorded five-year observation. The source has no daily or hourly records, so the 3-observation smoother is declared as observations, not days. A centered window is for historical description; a live dashboard would require the trailing version and a lag warning. Continent totals are mutually exclusive parts of world totals. The treemap and product catalogue adaptation is not possible because Gapminder has no parent-child product hierarchy. No rows were removed. The optional cycle/decomposition task cannot meet its minimum monthly-history requirement.

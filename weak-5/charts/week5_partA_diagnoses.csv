@@ -1,0 +1,10 @@
+task,adaptation,finding,chart_choice
+1,"GDP per capita, life expectancy and population replace health indicators.",Bubble area is bounded by an explicit size range; country population is not squared.,Scatterplot position compares two numeric measures; population is the bubble area.
+2,Use population totals and GDP per capita; no outbreak count or district boundaries exist.,No choropleth or disease-rate claim can be made from this dataset.,Sorted horizontal bars compare continent categories without implying geographic shape.
+3,Show GDP per capita scaling and the effect of a high outlier.,Min–max median=0.119; percentile-rank median=0.504.,A scatterplot shows GDP per capita against its scaled value.
+4,Compare numeric-axis order in a parallel-coordinates chart.,Greedy correlation order: lifeExp -> gdpPercap -> gdp_total -> pop.,Parallel coordinates show multiple numeric measures and make order effects visible.
+5,"Quantile-classify the observed life-expectancy values, not disease rates.",Range=39.6–82.6 years; classes are not evidence of five natural groups.,A sequential colour scale encodes ordered life-expectancy percentiles.
+6,"Use population size to discuss denominator caution, not a fabricated disease rate.",No case counts or Poisson rate estimates are available.,A log-scaled scatter shows population and GDP per person without calling either a disease rate.
+7,Compare country and continent-mean association of GDP and life expectancy.,Country r=0.679; continent-mean r=0.888.,Paired scatterplots keep country-level and continent-level associations distinct.
+8,Replace the land-area choropleth with a categorical population comparison.,"No area share, map projection, or geographic hotspot can be computed.",A sorted bar chart compares categories because no spatial geometry is available.
+9,Compare continent profiles on six normalized Gapminder indicators.,Radar polygon area depends on axis order; it is not a reliable overall score.,"A radar chart is retained only to demonstrate its area/order limitation, not to rank regions."

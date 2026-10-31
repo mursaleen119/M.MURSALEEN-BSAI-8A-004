@@ -1,46 +1,84 @@
 # Data Visualization Coursework
 
-Weeks 1–3 are completed using **one source dataset only**: Gapminder.
+**Student:** M. Mursaleen<br>
+**Class:** BSAI 8A<br>
+**Roll/ID:** 004
 
 ## Dataset
 
-- `data/gapminder.csv` — 1,704 country-year observations, 142 countries, five continents, 1952–2007.
-- Required fields have no missing values.
-- This is the single source dataset. Tables and charts in `outputs/` are derived results, not additional input datasets.
-- Source: Gapminder data included with the [course repository](https://github.com/UsmarHaider/data-visualization).
+All six weekly folders use exactly one source dataset: [`data/gapminder.csv`](data/gapminder.csv). It has 1,704 country-year rows for 142 countries, five continents, and 12 years from 1952 to 2007. It is included with the instructor's public [data-visualization course repository](https://github.com/UsmarHaider/data-visualization). I kept one copy because the time, category, population, life-expectancy, and GDP fields support many charting skills without adding conflicting datasets.
+
+The original briefs use different datasets. Each notebook marks where its task was adapted. Geography-specific tasks cannot produce honest maps without coordinates or boundaries, and human-reader experiments are left pending until real readers participate. No participant results or instructor-dataset defects are invented.
+
+## Weekly solutions
+
+| Week folder | Task name | Topic | Link to notebook |
+|---|---|---|---|
+| [weak-1](weak-1/) | Task 1 — Prove why we visualize | Summary statistics and country variation | [Notebook](weak-1/weak-1_solution.ipynb) |
+| [weak-1](weak-1/) | Task 2 — Trends and the spaghetti problem | Time-series aggregation and highlighting | [Notebook](weak-1/weak-1_solution.ipynb) |
+| [weak-1](weak-1/) | Task 3 — Distributions and relationships | Distributions and grouped associations | [Notebook](weak-1/weak-1_solution.ipynb) |
+| [weak-1](weak-1/) | Task 4 — Pick the right chart | Five question-led chart choices and redesign | [Notebook](weak-1/weak-1_solution.ipynb) |
+| [weak-1](weak-1/) | Task 5 — A real time series | Trend and repeated observations | [Notebook](weak-1/weak-1_solution.ipynb) |
+| [weak-2](weak-2/) | Task 1 — Preattentive attributes | Visual search and pop-out | [Notebook](weak-2/weak-2_solution.ipynb) |
+| [weak-2](weak-2/) | Task 2 — Gestalt principles | Grouping, connection, and proximity | [Notebook](weak-2/weak-2_solution.ipynb) |
+| [weak-2](weak-2/) | Task 3 — Cognitive load | Decluttering, data-ink, and chunking | [Notebook](weak-2/weak-2_solution.ipynb) |
+| [weak-2](weak-2/) | Task 4 — Channel effectiveness | Position, length, and area comparisons | [Notebook](weak-2/weak-2_solution.ipynb) |
+| [weak-2](weak-2/) | Task 5 — Capstone redesign | Perception audit and one-message redesign | [Notebook](weak-2/weak-2_solution.ipynb) |
+| [weak-3](weak-3/) | Part A — Nine chart diagnoses | Encoding, scales, bins, and honest redesigns | [Notebook](weak-3/weak-3_solution.ipynb) |
+| [weak-3](weak-3/) | Part B — Lie Factor | Measured chart distortion | [Notebook](weak-3/weak-3_solution.ipynb) |
+| [weak-3](weak-3/) | Part C — Palette check | Colour-vision simulation | [Notebook](weak-3/weak-3_solution.ipynb) |
+| [weak-3](weak-3/) | Part D — Review figure | Four-panel statistical review | [Notebook](weak-3/weak-3_solution.ipynb) |
+| [weak-3](weak-3/) | Part E — Written justification | Parameters, exclusions, and trade-offs | [Notebook](weak-3/weak-3_solution.ipynb) |
+| [weak-4](weak-4/) | Part A — Nine temporal/composition cases | Date order, aggregation, smoothing, shares | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-4](weak-4/) | Part B — Window sensitivity | Rolling windows and slope direction | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-4](weak-4/) | Part C — Part-to-whole legality | Exclusive shares, pie and bar comparison | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-4](weak-4/) | Part D — Review figure | Four-panel time and composition dashboard | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-4](weak-4/) | Part E — Written justification | Window and aggregation choices | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-4](weak-4/) | Part F — Bonus cycle plot | Limits of the available time resolution | [Notebook](weak-4/weak-4_solution.ipynb) |
+| [weak-5](weak-5/) | Part A — Nine multivariate diagnoses | Bubble size, scaling, axes, aggregation, radar | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-5](weak-5/) | Part B — Channel and spatial decisions | Overplotting, PCA, and geography limits | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-5](weak-5/) | Part C — Two-map activity | Categorical comparison; real-reader results pending | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-5](weak-5/) | Part D — Three multivariate figures | Bubble plot and parallel coordinates | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-5](weak-5/) | Part E — Written justification | Channels, scaling, and missing geometry | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-5](weak-5/) | Part F — Bonus normalized map | Not possible without a second spatial dataset | [Notebook](weak-5/weak-5_solution.ipynb) |
+| [weak-6](weak-6/) | Task A — Data audit | Keys, missingness, sentinels, and ranges | [Notebook](weak-6/weak-6_solution.ipynb) |
+| [weak-6](weak-6/) | Task B — Three chart questions | Trend, composition, and relationship | [Notebook](weak-6/weak-6_solution.ipynb) |
+| [weak-6](weak-6/) | Task C — Board figure | Life-expectancy trend for a named audience | [Notebook](weak-6/weak-6_solution.ipynb) |
+| [weak-6](weak-6/) | Task D — Bonus interaction | Filterable, hoverable local HTML chart | [Notebook](weak-6/weak-6_solution.ipynb) |
+
+## Key charts
+
+### weak-1
+
+![Gapminder country trends](weak-1/charts/week1_task2_continent_trends.png)
+
+### weak-2
+
+![Perception redesign](weak-2/charts/week2_task5_redesign.png)
+
+### weak-3
+
+![Week 3 review figure](weak-3/charts/week3_partD_development_review.png)
+
+### weak-4
+
+![Week 4 review figure](weak-4/charts/week4_taskD_review_figure.png)
+
+### weak-5
+
+![Week 5 multivariate views](weak-5/charts/week5_taskD_three_figures.png)
+
+### weak-6
+
+![Week 6 board figure](weak-6/charts/week6_taskC_board_figure.png)
 
 ## Run
 
 ```powershell
 python -m pip install -r requirements.txt
-python coursework\solutions.py
+python coursework\weekly_coursework.py
 ```
 
-Open [`coursework/coursework.ipynb`](coursework/coursework.ipynb) to review the 15 task sections and embedded chart outputs. Run the script first to regenerate all figures and summary files.
+Then open any `weak-N\weak-N_solution.ipynb` notebook in Jupyter. Each notebook runs its week's figures and displays its saved outputs. The interactive Week 6 bonus is `weak-6\charts\week6_interactive.html`.
 
-## Coverage
-
-| Week | Tasks completed with Gapminder |
-|---|---|
-| 1 | Summary versus shape; trend aggregation/highlights; distributions and relationships; chart selection/redesign; long-term time series |
-| 2 | Preattentive highlighting; six grouping cues; cognitive-load redesign; position/length versus area; capstone redesign |
-| 3 | Nine chart failure modes and redesigns; Lie Factor calculations; colour-vision palette simulation; four-panel development review; written justification |
-
-The original course tasks use different datasets and, in Week 2, controlled stimuli. To honour the one-dataset requirement, this repository adapts the concepts to Gapminder rather than retaining conflicting source datasets or pretending that Gapminder contains those other measurements.
-
-## Human-participant tasks
-
-No human responses or reaction times are fabricated. To collect authentic observations, run:
-
-```python
-from coursework.solutions import collect_human_results, load_data
-collect_human_results(load_data())
-```
-
-The function records visual-search response time, Gestalt group counts, channel estimates, and the reader's verbatim redesign interpretation in `outputs/human_results.csv`. These components remain pending until a real participant completes them.
-
-## Outputs
-
-- `outputs/` — generated figures, summary tables, diagnostics, and written Week 3 justification.
-- `coursework/solutions.py` — reproducible pipeline for all 15 adapted tasks.
-- `coursework/vizlib.py` — course palette, colour-vision simulation, and Lie Factor helpers.
+The earlier integrated portfolio notebook remains at [`coursework/coursework.ipynb`](coursework/coursework.ipynb), and the reusable Week 1–3 generation code is in [`coursework/solutions.py`](coursework/solutions.py).

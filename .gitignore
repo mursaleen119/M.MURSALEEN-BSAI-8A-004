@@ -13,6 +13,9 @@ venv/
 *.png
 !outputs/
 !outputs/*.png
+!weak-*/
+!weak-*/charts/
+!weak-*/charts/*.png
 
 # macOS
 .DS_Store

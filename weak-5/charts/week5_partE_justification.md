@@ -1,0 +1,3 @@
+# Week 5 written justification
+
+Position carries GDP per capita and life expectancy because those are the main comparisons; population uses bounded area with a visible legend note. Parallel-coordinate axes are min–max scaled and ordered by a greedy absolute-correlation chain; the order is printed above the plot. A geographic rate map, equal-area projection, district class breaks, land shares, county experiment and small-area funnel cannot be produced: this one-source repository contains no polygons, coordinates, disease counts or reader responses. Continent bars are explicitly categorical, not maps. No participant results are invented.
