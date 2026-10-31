@@ -1,0 +1,10 @@
+case,diagnosis
+1,A truncated bar axis magnifies small differences; zero-baseline bars show the true scale.
+2,Extreme rich countries compress a linear GDP axis; a log axis reveals the low-income majority.
+3,Histogram appearance depends on bin count; disclose and justify it.
+4,Country-by-country labels create unnecessary cognitive load; summarize or filter with a declared rule.
+5,A sequential palette does not represent negative and positive correlation around zero; use a diverging palette fixed at -1 to 1.
+6,Independent dual axes invite false visual alignment; use separate labelled panels.
+7,Pie slices hinder precise category comparisons; use a sorted zero-based bar chart.
+8,Gaussian KDE smoothing can place density outside observed data; declare bandwidth and use a log histogram or boundary-aware method.
+9,Pooled association masks continent structure; use grouping and compare within-group patterns.

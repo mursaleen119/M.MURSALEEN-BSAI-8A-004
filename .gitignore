@@ -11,9 +11,8 @@ venv/
 
 # Generated output
 *.png
-!week1/charts/*.png
-!week2/outputs/*.png
-!week3/outputs/*.png
+!outputs/
+!outputs/*.png
 
 # macOS
 .DS_Store
