@@ -1,19 +1,10 @@
-# Week 2 solution
+# Week 2 ? Official visual-perception deliverables
 
-Dataset: [`../data/gapminder.csv`](../data/gapminder.csv). Task-specific dataset differences are noted in the notebook; no other source dataset is added.
+Use `task1.ipynb` through `task5.ipynb`, each paired with an executable task function in `assignments/week2_assignment.py`. Outputs include fixed-seed stimulus charts, redesigns, result-entry templates, and written reasoning.
 
-Notebook: [`weak-2_solution.ipynb`](weak-2_solution.ipynb)
+Official brief: https://github.com/UsmarHaider/data-visualization/blob/main/week2/assignments/TASKS.md
+Course README: https://github.com/UsmarHaider/data-visualization/blob/main/week2/README.md
 
-## Tasks
+Human-reader work remains uncollected. `task1_reader_protocol.md`, `task2_reader_protocol.md`, `task4_reader_protocol.md`, and `task5_reader_protocol.md` explain how to collect real responses. CSV templates are blank by design. Task 1's brief says 18 trials but its complete 3-condition ? 5-size ? present/absent requirement is 30; the runnable protocol uses the complete 30-trial design and documents the ambiguity.
 
-1. **Task 1 — Preattentive search** — A Gapminder-derived visual comparison is provided. Reaction times require a real reader and remain uncollected; see reader_protocol.md.
-2. **Task 2 — Gestalt grouping** — Six grouping ideas and a connection-versus-similarity display are adapted; perceived group counts remain pending.
-3. **Task 3 — Cognitive load** — A deliberately labelled bad example is compared with a less cluttered view and a chunked summary.
-4. **Task 4 — Channel effectiveness** — Position, length and area are compared visually; reader estimates are not fabricated.
-5. **Task 5 — Capstone redesign** — One message is highlighted with muted context and a perception audit; human interpretation remains pending.
-
-## Charts and files
-
-Figures and audit artifacts are saved under [`charts/`](charts/). Human-participant tasks are not marked complete until real responses are collected.
-
-Reader collection notes: [`reader_protocol.md`](reader_protocol.md).
+Run `assignments/download_assignment_data.py` to fetch the official datasets and generate fixed-seed stimuli (SEED=42). Downloaded/generated CSV inputs are local-only caches ignored by `assignments/data/.gitignore`.

@@ -1,0 +1,7 @@
+dimension,bad_example,redesign
+Preattentive,Many similar lines; weak hue differences do no useful work,One hue and line thickness make the selected trajectory pop out
+Pop-out,Many legend colors compete; not one message,"Exactly one orange trajectory, matching title"
+Gestalt,"Continuity connects each country path, but 142 lines cross",Continuity connects the target; proximity/direct label avoids legend lookup
+Cognitive load,"142 labels, 142 hues, repeated legend decoding: mostly extraneous",One label and one highlighted trajectory; country variation intrinsic
+Channels,Year uses x-position; life expectancy uses y-position; hue encodes nominal country,Life expectancy remains positional; highlight hue is redundant identity cue
+Working memory,Reader must map 142 colors from legend to lines,One named country plus overall context (2 chunks)

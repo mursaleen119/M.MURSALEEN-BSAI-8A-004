@@ -1,0 +1,9 @@
+participant_id,panel,true_groups,perceived_groups,match
+,proximity,4,,
+,similarity,4,,
+,enclosure,4,,
+,continuity,2,,
+,closure,2,,
+,connection,24,,
+,connection_with_lines,24,,
+,connection_without_lines,24,,

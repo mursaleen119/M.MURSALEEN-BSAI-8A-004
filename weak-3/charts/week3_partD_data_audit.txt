@@ -1,0 +1,57 @@
+1. df.info()
+<class 'pandas.DataFrame'>
+RangeIndex: 10000 entries, 0 to 9999
+Data columns (total 16 columns):
+ #   Column          Non-Null Count  Dtype
+---  ------          --------------  -----
+ 0   patient_id      10000 non-null  str
+ 1   admit_date      10000 non-null  str
+ 2   ward            10000 non-null  str
+ 3   age             10000 non-null  int64
+ 4   sex             10000 non-null  str
+ 5   systolic        10000 non-null  int64
+ 6   diastolic       10000 non-null  int64
+ 7   map_mmhg        10000 non-null  float64
+ 8   heart_rate      10000 non-null  int64
+ 9   spo2            10000 non-null  int64
+ 10  bmi             10000 non-null  float64
+ 11  chol_mmol_l     10000 non-null  float64
+ 12  glucose_mmol_l  10000 non-null  float64
+ 13  los_days        10000 non-null  float64
+ 14  readmitted_30d  10000 non-null  int64
+ 15  risk_score      10000 non-null  float64
+dtypes: float64(6), int64(6), str(4)
+memory usage: 1.2 MB
+
+2. df.describe().T
+                  count        mean         std   min         25%       50%       75%     max
+age             10000.0   58.113800   16.639728  18.0   47.000000   58.0000   69.0000   97.00
+systolic        10000.0  137.656700   22.597192  92.0  119.000000  128.0000  160.0000  199.00
+diastolic       10000.0   79.628200   13.134109  45.0   69.000000   78.0000   90.0000  125.00
+map_mmhg        10000.0   98.970690   15.830095  65.3   85.700000   94.3000  113.7000  149.70
+heart_rate      10000.0   78.833100   20.557021   0.0   69.000000   78.0000   87.0000  415.00
+spo2            10000.0   96.724000    2.239671  81.0   96.000000   97.0000   98.0000  100.00
+bmi             10000.0   66.177040  190.996849   0.0   24.000000   27.6000   31.2000  999.00
+chol_mmol_l     10000.0    4.823818    1.010410   2.1    4.140000    4.8200    5.5100    8.79
+glucose_mmol_l  10000.0    6.550060    1.145823   5.1    5.700000    6.3000    7.1000   13.90
+los_days        10000.0    2.309091    8.923347   0.0    0.610000    1.3800    2.5700  273.65
+readmitted_30d  10000.0    0.041100    0.198531   0.0    0.000000    0.0000    0.0000    1.00
+risk_score      10000.0    1.120877    1.103493   0.0    0.310475    0.9615    1.7241    9.00
+
+3. df.ward.value_counts()
+ward
+General Medicine    1356
+general medicine    1353
+Gen Medicine        1309
+CARDIOLOGY           914
+cardio               886
+Cardiology           882
+Day Surgery          749
+Day-Surgery          730
+Intensive Care       486
+ICU                  480
+ I.C.U               442
+icu                  413
+
+4. df.admit_date.head(20).tolist()
+['2026-01-19', '08-Mar-2026', '2026-02-26', '27/02/2026', '09/01/2026', '01-Apr-2026', '17-Apr-2026', '24-Mar-2026', '14-Apr-2026', '02-Jan-2026', '10/03/2026', '10/02/2026', '12-Apr-2026', '29/03/2026', '17-Apr-2026', '12/02/2026', '2026-03-28', '2026-02-03', '11-Apr-2026', '08/01/2026']

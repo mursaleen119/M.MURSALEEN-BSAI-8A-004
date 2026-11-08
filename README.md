@@ -1,89 +1,30 @@
 # Data Visualization Coursework
 
-**Student:** M. Mursaleen<br>
-**Class:** BSAI 8A<br>
+**Student:** M. Mursaleen
+
+**Class:** BSAI 8A
 **Roll/ID:** 004
-
-## Dataset
-
-All six weekly folders use exactly one source dataset: [`data/gapminder.csv`](data/gapminder.csv). It has 1,704 country-year rows for 142 countries, five continents, and 12 years from 1952 to 2007. It is included with the instructor's public [data-visualization course repository](https://github.com/UsmarHaider/data-visualization). I kept one copy because the time, category, population, life-expectancy, and GDP fields support many charting skills without adding conflicting datasets.
-
-The original briefs use different datasets. Each notebook marks where its task was adapted. Geography-specific tasks cannot produce honest maps without coordinates or boundaries, and human-reader experiments are left pending until real readers participate. No participant results or instructor-dataset defects are invented.
 
 ## Weekly solutions
 
-| Week folder | Task name | Topic | Link to notebook |
-|---|---|---|---|
-| [weak-1](weak-1/) | Task 1 — Prove why we visualize | Summary statistics and country variation | [Notebook](weak-1/weak-1_solution.ipynb) |
-| [weak-1](weak-1/) | Task 2 — Trends and the spaghetti problem | Time-series aggregation and highlighting | [Notebook](weak-1/weak-1_solution.ipynb) |
-| [weak-1](weak-1/) | Task 3 — Distributions and relationships | Distributions and grouped associations | [Notebook](weak-1/weak-1_solution.ipynb) |
-| [weak-1](weak-1/) | Task 4 — Pick the right chart | Five question-led chart choices and redesign | [Notebook](weak-1/weak-1_solution.ipynb) |
-| [weak-1](weak-1/) | Task 5 — A real time series | Trend and repeated observations | [Notebook](weak-1/weak-1_solution.ipynb) |
-| [weak-2](weak-2/) | Task 1 — Preattentive attributes | Visual search and pop-out | [Notebook](weak-2/weak-2_solution.ipynb) |
-| [weak-2](weak-2/) | Task 2 — Gestalt principles | Grouping, connection, and proximity | [Notebook](weak-2/weak-2_solution.ipynb) |
-| [weak-2](weak-2/) | Task 3 — Cognitive load | Decluttering, data-ink, and chunking | [Notebook](weak-2/weak-2_solution.ipynb) |
-| [weak-2](weak-2/) | Task 4 — Channel effectiveness | Position, length, and area comparisons | [Notebook](weak-2/weak-2_solution.ipynb) |
-| [weak-2](weak-2/) | Task 5 — Capstone redesign | Perception audit and one-message redesign | [Notebook](weak-2/weak-2_solution.ipynb) |
-| [weak-3](weak-3/) | Part A — Nine chart diagnoses | Encoding, scales, bins, and honest redesigns | [Notebook](weak-3/weak-3_solution.ipynb) |
-| [weak-3](weak-3/) | Part B — Lie Factor | Measured chart distortion | [Notebook](weak-3/weak-3_solution.ipynb) |
-| [weak-3](weak-3/) | Part C — Palette check | Colour-vision simulation | [Notebook](weak-3/weak-3_solution.ipynb) |
-| [weak-3](weak-3/) | Part D — Review figure | Four-panel statistical review | [Notebook](weak-3/weak-3_solution.ipynb) |
-| [weak-3](weak-3/) | Part E — Written justification | Parameters, exclusions, and trade-offs | [Notebook](weak-3/weak-3_solution.ipynb) |
-| [weak-4](weak-4/) | Part A — Nine temporal/composition cases | Date order, aggregation, smoothing, shares | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-4](weak-4/) | Part B — Window sensitivity | Rolling windows and slope direction | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-4](weak-4/) | Part C — Part-to-whole legality | Exclusive shares, pie and bar comparison | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-4](weak-4/) | Part D — Review figure | Four-panel time and composition dashboard | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-4](weak-4/) | Part E — Written justification | Window and aggregation choices | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-4](weak-4/) | Part F — Bonus cycle plot | Limits of the available time resolution | [Notebook](weak-4/weak-4_solution.ipynb) |
-| [weak-5](weak-5/) | Part A — Nine multivariate diagnoses | Bubble size, scaling, axes, aggregation, radar | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-5](weak-5/) | Part B — Channel and spatial decisions | Overplotting, PCA, and geography limits | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-5](weak-5/) | Part C — Two-map activity | Categorical comparison; real-reader results pending | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-5](weak-5/) | Part D — Three multivariate figures | Bubble plot and parallel coordinates | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-5](weak-5/) | Part E — Written justification | Channels, scaling, and missing geometry | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-5](weak-5/) | Part F — Bonus normalized map | Not possible without a second spatial dataset | [Notebook](weak-5/weak-5_solution.ipynb) |
-| [weak-6](weak-6/) | Task A — Data audit | Keys, missingness, sentinels, and ranges | [Notebook](weak-6/weak-6_solution.ipynb) |
-| [weak-6](weak-6/) | Task B — Three chart questions | Trend, composition, and relationship | [Notebook](weak-6/weak-6_solution.ipynb) |
-| [weak-6](weak-6/) | Task C — Board figure | Life-expectancy trend for a named audience | [Notebook](weak-6/weak-6_solution.ipynb) |
-| [weak-6](weak-6/) | Task D — Bonus interaction | Filterable, hoverable local HTML chart | [Notebook](weak-6/weak-6_solution.ipynb) |
-| [weak-7](weak-7/) | Week 7 — Transit authority dashboard | Transit-file audit and cleaning, four static charts, interactive fare view, and Simpson's-paradox dashboard | [README](weak-7/README.md) |
+Each folder follows the corresponding instructor brief. The coursework therefore uses each week's prescribed datasets rather than substituting one dataset across unrelated tasks. Downloaded inputs are cached locally and ignored by Git; scripts record cleaning decisions and write reproducible outputs.
 
-## Key charts
+| Week | Instructor assignment and deliverables | Run from repository root |
+|---|---|---|
+| [weak-1](weak-1/weak-1_README.md) | Five tasks on Datasaurus, Gapminder, Palmer penguins, Auto MPG, and airline passengers. | `python weak-1\assignments\week1_assignment.py` |
+| [weak-2](weak-2/weak-2_README.md) | Five perception tasks, controlled stimuli, chart redesigns, and real-reader protocols. | `python weak-2\assignments\week2_assignment.py` |
+| [weak-3](weak-3/weak-3_README.md) | Nine chart diagnoses, Lie Factor and palette audits, clinical review figure, and justification. | `python weak-3\assignments\week3_assignment.py` |
+| [weak-4](weak-4/README.md) | Time-series and hierarchy diagnoses, computed window analysis, four-panel figure, and bonus. | `python weak-4\run_week4.py` |
+| [weak-5](weak-5/README.md) | Multivariate and geospatial diagnoses, channel decisions, reader activity, and three health figures. | `python weak-5\run_week5.py` |
+| [weak-6](weak-6/README.md) | National Grid Authority audit, cleaning, three analysis charts, normalized board figure, and interactive bonus. | `python weak-6\run_week6.py` |
+| [weak-7](weak-7/README.md) | Transit Authority audit, cleaning, four static charts, interactive fare view, and dashboard. | `python weak-7\run_week7.py` |
 
-### weak-1
+Use the requirements file and README inside the relevant week folder for that week's dependencies and setup. Week 1–3 also include task-specific Jupyter notebooks alongside the reproducible scripts.
 
-![Gapminder country trends](weak-1/charts/week1_task2_continent_trends.png)
+## Reader studies
 
-### weak-2
+Some instructor tasks require real people to complete visual-search, grouping, chart-estimation, or map-comparison activities. Protocols and blank response templates are supplied where needed; results are explicitly marked uncollected until real participants provide them. No participant observations are fabricated, so those reader-study marks require completing the activities and recording genuine responses.
 
-![Perception redesign](weak-2/charts/week2_task5_redesign.png)
+## Portfolio material
 
-### weak-3
-
-![Week 3 review figure](weak-3/charts/week3_partD_development_review.png)
-
-### weak-4
-
-![Week 4 review figure](weak-4/charts/week4_taskD_review_figure.png)
-
-### weak-5
-
-![Week 5 multivariate views](weak-5/charts/week5_taskD_three_figures.png)
-
-### weak-6
-
-![Week 6 board figure](weak-6/charts/week6_taskC_board_figure.png)
-
-### weak-7
-
-![Week 7 transit dashboard](weak-7/charts/partD_screen.png)
-
-## Run
-
-```powershell
-python -m pip install -r requirements.txt
-python coursework\weekly_coursework.py
-```
-
-Then open any `weak-N\weak-N_solution.ipynb` notebook in Jupyter. Each notebook runs its week's figures and displays its saved outputs. The interactive Week 6 bonus is `weak-6\charts\week6_interactive.html`.
-
-The earlier integrated portfolio notebook remains at [`coursework/coursework.ipynb`](coursework/coursework.ipynb), and the reusable Week 1–3 generation code is in [`coursework/solutions.py`](coursework/solutions.py).
+The original integrated portfolio notebook remains at [`coursework/coursework.ipynb`](coursework/coursework.ipynb), with reusable earlier coursework code in [`coursework/solutions.py`](coursework/solutions.py). These are separate from the instructor-brief deliverables above.

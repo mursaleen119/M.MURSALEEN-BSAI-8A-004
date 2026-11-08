@@ -1,9 +1,9 @@
-palette,vision,slot_i,slot_j,delta_e
-tab10,normal,1,5,14.177875607386648
-tab10,protan,2,3,0.681176754102583
-tab10,deutan,3,4,4.058729716235562
-tab10,tritan,1,3,6.721179974506396
-Okabe-Ito course palette,normal,2,4,16.419658206690205
-Okabe-Ito course palette,protan,1,4,9.494498011532
-Okabe-Ito course palette,deutan,3,4,7.546637952916592
-Okabe-Ito course palette,tritan,1,3,8.372200722672284
+palette,cvd_type,slot_i,slot_j,color_i,color_j,delta_e
+tab10_first4,normal,2,4,#ff7f0e,#d62728,18.597644625857072
+tab10_first4,deutan,3,4,#2ca02c,#d62728,4.058729716235562
+tab10_first4,protan,2,3,#ff7f0e,#2ca02c,0.681176754102583
+tab10_first4,tritan,1,3,#1f77b4,#2ca02c,6.721179974506396
+course_series_plus_fourth,normal,2,4,#D55E00,#CC79A7,16.419658206690205
+course_series_plus_fourth,deutan,3,4,#009E73,#CC79A7,7.546637952916592
+course_series_plus_fourth,protan,1,4,#0072B2,#CC79A7,9.494498011532
+course_series_plus_fourth,tritan,1,3,#0072B2,#009E73,8.372200722672284

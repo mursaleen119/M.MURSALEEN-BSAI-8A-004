@@ -1,0 +1,3 @@
+Week 3 palette check, using vizlib.worst_pair across every pair.
+Deuteranopia-simulated closest pair: (3, 4, '#009E73', '#CC79A7', 7.546637952916592)
+The fourth hue requires direct labels/redundant text; figures using it do so.

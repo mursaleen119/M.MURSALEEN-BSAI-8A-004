@@ -1,0 +1,6 @@
+problem,rule,affected_rows,result
+Three date string formats,"Parse ISO, DD/MM/YYYY, and DD-Mon-YYYY explicitly",10000,All dates parsed; raw string retained
+Ward aliases and inconsistent punctuation/case,Normalize known spellings into canonical units,6533,"['Cardiology', 'Day Surgery', 'General Medicine', 'ICU']"
+BMI sentinels (0 and 999),"Set sentinels to missing, not valid measurements",486,"0=84, 999=402"
+Heart-rate zero and >250 values,Exclude for HR distribution; display raw appendix,37,"zero=8, >250=29"
+MAP is derived; risk_score is a ratio,Exclude derived MAP from correlation; do not aggregate ratio as rate,0,Avoid redundant BP correlation and invalid rate aggregation

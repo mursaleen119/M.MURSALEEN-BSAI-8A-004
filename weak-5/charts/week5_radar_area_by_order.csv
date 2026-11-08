@@ -1,3 +1,0 @@
-axis_order,Europe_polygon_area,Africa_polygon_area
-lifeExp | lifeExp_median | gdp | gdp_median | population | population_median,10487.191122876906,11.724514656088337
-gdp | gdp_median | population | population_median | lifeExp | lifeExp_median,10487.191122876906,11.724514656088338

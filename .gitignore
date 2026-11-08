@@ -17,6 +17,12 @@ venv/
 !weak-*/charts/
 !weak-*/charts/*.png
 weak-7/data/
+weak-6/data/
+weak-5/data/
+weak-4/data/
+weak-3/assignments/data/
+weak-2/assignments/data/
+weak-1/assignments/data/
 
 # macOS
 .DS_Store

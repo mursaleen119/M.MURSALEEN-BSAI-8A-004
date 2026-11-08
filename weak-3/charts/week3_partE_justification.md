@@ -1,11 +1,11 @@
 # Part E — written justification
 
-**One source dataset:** Gapminder (1,704 country-year rows, 142 countries, five continents, 1952–2007; no missing required values). All weekly tasks use this same dataset. Country/year rows are retained; summaries state their aggregation explicitly.
+**Panel 1 — heart-rate histogram.** The safety-review question concerns the shape of the valid resting-rate distribution. A histogram is appropriate for a continuous measure; 30 equal-width bins are explicit. Readings above 250 bpm were removed as device faults (n=29); zero bpm records (n=8) were also excluded as invalid. Mean heart rate moves from 78.83 to 78.05 bpm. The figure was also produced without exclusion; see `week3_partD_heart_rate_appendix.png`.
 
-**Panels and parameters.** The income histogram uses 21 geometric bins on a log x-scale because GDP per capita is strongly right-skewed. Life expectancy boxplots retain outliers and use the five continent categories. The scatter uses log GDP per capita and continent colour as context, not as the only data encoding. The correlation heatmap uses a diverging palette with `vmin=-1`, `vmax=1`, and zero centered. No dual axes are used.
+**Panel 2 — ward length of stay.** Box plots compare center and spread by ward after melting the intentionally wide file. Whiskers use 1.5×IQR and fliers remain visible. Median days: {'Cardiology': 1.69, 'Day Surgery': 0.25, 'General Medicine': 1.26, 'ICU': 3.48}.
 
-**Interpretation and limitations.** The country-level association between income and life expectancy is descriptive, not causal. Aggregated continent means conceal within-continent variation. A 5-year observation interval cannot establish monthly seasonality. Gapminder has no visual-search reaction times or reader responses; required Week 2 human results are explicitly left pending and have a collection workflow.
+**Panel 3 — blood pressure.** The scatter uses all 10,000 records, alpha=0.22 to reduce overplotting, and a fitted line; systolic/diastolic r=0.89. MAP is derived from these measures and is not an independent clinical variable.
 
-**Ethical data handling.** There are no missing required values and no observations are excluded. Income is log-scaled but never removed. Country aggregates and weighting choices are labelled. The GDP ratio is descriptive and is not presented as a causal inequality explanation.
+**Panel 4 — correlation matrix.** Pearson r uses a diverging map fixed at −1…+1 with neutral zero and only the lower triangle. BMI 0 (n=84) and 999 (n=402) were set to missing (n=486 invalid BMI cells). No patient rows were removed from the other panels.
 
-**Redesign trade-off.** Grouping and highlighting reduce visual load but make within-group country paths less prominent. Direct labels avoid legend lookups but focus attention on selected countries only.
+All data are synthetic course records, not real patients. Dates were parsed from the three observed source formats, ward aliases normalized, units labeled, fliers kept, and MAP excluded from the matrix. The cleaning rules are based on format/measurement validity, not desired findings; the raw appendix makes HR exclusions reversible and inspectable.

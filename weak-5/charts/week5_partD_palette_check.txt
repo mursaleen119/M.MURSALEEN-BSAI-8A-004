@@ -1,0 +1,4 @@
+Six-region categorical palette measured with vizlib.worst_pair.
+Normal closest pair: (2, 6, '#de8f05', '#ca9161', 6.396529457269814)
+Deuteranopia-simulated closest pair: (2, 6, '#de8f05', '#ca9161', 6.5652148719997045)
+Distinct marker shapes and direct labels are redundant channels; color alone is not claimed to be sufficient.

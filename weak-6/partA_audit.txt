@@ -1,0 +1,38 @@
+Week 6 Task A — reproducible raw-data audit and cleaning
+Source revision: 095acf496b9dd19f448d83ad1220a65f493d9b9d
+Raw inputs are fetched into ignored weak-6/data/ if absent; raw files are never modified.
+
+RAW FILE AUDITS
+district_grid.csv: rows=25; dtypes={'code': 'string', 'district': 'str', 'zone': 'str', 'population': 'int64', 'households': 'int64', 'area_km2': 'float64', 'lon': 'float64', 'lat': 'float64', 'income_pc_usd': 'int64', 'electrification_pct': 'str', 'solar_kw_installed': 'int64', 'outages': 'int64', 'outage_minutes': 'int64'}; key=['code']; unique=24; duplicate rows=1; missing cells=3
+grid_daily.csv: rows=3,061; dtypes={'date': 'string', 'zone': 'str', 'cumulative_mwh': 'float64', 'peak_load_mw': 'float64', 'outage_minutes': 'int64'}; key=['date', 'zone']; unique=3,046; duplicate rows=15; missing cells=0
+generation_mix.csv: rows=162; dtypes={'month': 'string', 'source': 'str', 'subsource': 'str', 'mwh': 'int64'}; key=['month', 'source', 'subsource']; unique=162; duplicate rows=0; missing cells=0
+regions.geojson: features=24; unique codes=24.
+
+DISTRICT REGISTER — FINDINGS AND REPAIRS
+District duplicate codes=['D11']; GeoJSON exact-name match retained the canonical row; duplicate rows dropped=1.
+Household denominator anomaly: D21 had 182 households (population/households=5,939.6); repaired to 182,000 using the evident thousand-unit scale.
+Electrification values with percent suffix parsed=2; genuine missing values retained=3.
+District outage_minutes=-1 operator sentinels set missing=2.
+District totals after cleaning: rows=24, population=57,857,000, households=8,908,512; people/household=5.70–7.36.
+Electrification range=66.600 to 90.300; outage minutes per outage (usable districts)=77.4–213.7.
+
+DAILY RETURNS — FINDINGS AND REPAIRS
+Dates: ISO rows=2,887; explicit day-first rows=174; normalized duplicate date-zone keys=15; exact duplicate rows removed=12; conflicting resubmission rows removed=3; conflicting duplicate keys=[('2025-10-25', 'P3'), ('2026-02-25', 'P5'), ('2026-08-16', 'P5')]. First source row retained deterministically.
+Reporting span=2025-04-01 to 2026-09-11 (529 dates × 6 zones=3174 expected slots); unreported slots=128 by zone={'P1': 12, 'P2': 21, 'P3': 15, 'P4': 24, 'P5': 36, 'P6': 20}. Missing slots remain absent, not zero.
+Zone join to district register: matched=6/6; unmatched daily zones=[].
+peak_load_mw=-1 sentinels set missing=46; cumulative meter declines=1; invalid reading rows=[{'date': Timestamp('2026-02-17 00:00:00'), 'zone': 'P4', 'cumulative_mwh': 1180.0}]; unrecoverable counter value set missing.
+Clean daily ranges: cumulative_mwh=43,381.400 to 63,210,730.900; peak_load_mw=914.000 to 9,917.500; outage_minutes=0.000 to 512.000.
+
+GENERATION MIX — FINDINGS AND REPAIRS
+Rows=162; published parent/total rows=18; mutually exclusive leaf rows=144; max parts-vs-published difference=2 MWh; summing all rows gives 200.0% of the parts total; month range=2025-04 to 2026-09; monthly row counts={9: 18}; leaf MWh range=446,189.000 to 3,566,787.000.
+GeoJSON join: matched=24/24; unmatched features=[]; unmatched districts=[].
+
+DENOMINATOR RANGES
+Population: 468,000.000 to 10,966,000.000; households: 76,721.000 to 1,566,571.000.
+Daily operated-zone slot denominator is not used; peak-load values are instantaneous maxima, not additive.
+Valid district outage denominators: outages 3,234.000 to 63,237.000; usable outage-minute rows=22/24.
+
+PARAMETER AUDIT
+Meter-based monthly energy is the difference between readings on the first day of consecutive months; a counter is never summed.
+Partial September 2026 is excluded from complete-month comparisons; absent zone-days are unknown, not zero.
+Generation comparisons use the eight mutually exclusive leaf categories and exclude published parent/total rows.
