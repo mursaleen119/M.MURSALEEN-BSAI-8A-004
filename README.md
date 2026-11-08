@@ -45,6 +45,7 @@ The original briefs use different datasets. Each notebook marks where its task w
 | [weak-6](weak-6/) | Task B — Three chart questions | Trend, composition, and relationship | [Notebook](weak-6/weak-6_solution.ipynb) |
 | [weak-6](weak-6/) | Task C — Board figure | Life-expectancy trend for a named audience | [Notebook](weak-6/weak-6_solution.ipynb) |
 | [weak-6](weak-6/) | Task D — Bonus interaction | Filterable, hoverable local HTML chart | [Notebook](weak-6/weak-6_solution.ipynb) |
+| [weak-7](weak-7/) | Week 7 — Integrated visual analysis | Gapminder-based audit, four charts, interactive filter, and dashboard; transit-only tasks are documented as unavailable | [README](weak-7/README.md) |
 
 ## Key charts
 
@@ -71,6 +72,10 @@ The original briefs use different datasets. Each notebook marks where its task w
 ### weak-6
 
 ![Week 6 board figure](weak-6/charts/week6_taskC_board_figure.png)
+
+### weak-7
+
+![Week 7 dashboard](weak-7/charts/partD_screen.png)
 
 ## Run
 

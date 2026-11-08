@@ -1,0 +1,17 @@
+Week 7 adapted audit — source is the existing data/gapminder.csv
+Rows: 1,704; columns: country, year, pop, continent, lifeExp, gdpPercap
+Dtypes: country=str; year=int64; pop=float64; continent=str; lifeExp=float64; gdpPercap=float64
+Unique country-year keys: 1,704; duplicate keys: 0
+Missing cells: 0
+Countries: 142; continents: Africa, Americas, Asia, Europe, Oceania
+Observation years: 1952–2007 (12 values); year steps: [5]
+Countries with a row-count other than 12: 0; countries missing an expected year: 0
+Non-positive values (invalid for calculations): pop=0, lifeExp=0, gdpPercap=0
+Ranges used in calculations: pop=60,011.000–1,318,683,096.000; lifeExp=23.599–82.603; gdpPercap=241.166–113,523.133
+Division denominators: population is positive (60,011–1,318,683,096); GDP per capita is positive (241.166–113,523.133).
+Join misses: not applicable; no external boundary or transit table is used.
+Geographic audit: not possible; Gapminder has no coordinates or boundary geometry.
+Channel plan: continent is consistently mapped to color and marker shape; year is horizontal position on time charts; life expectancy is vertical position where plotted; population share is vertical position only on its panel.
+Channel conflict check: 0 conflicts under the plan above.
+Palette check: Seaborn's colorblind palette is used, with marker shape as a redundant continent cue. Instructor vizlib.cvd_report() is unavailable in this one-dataset adaptation, so no simulation result is claimed.
+Scope note: transit-specific 14-defect audit, route overlap, drill-down, and normalized district map cannot be reproduced from Gapminder.
