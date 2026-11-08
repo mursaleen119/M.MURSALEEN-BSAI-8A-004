@@ -1,9 +1,9 @@
 # Task C — Interaction contract
 
-**Default state:** the 2007 scatter shows all 142 countries, with GDP per capita on a log-scaled x-axis and life expectancy in years on the y-axis.
+**Default state:** all four modes' monthly blended fares are visible for complete months April 2025–August 2026, measured as PKR revenue per fare-system journey.
 
-**Controls:** each continent checkbox hides or restores that continent's country points; it does not change the data, scale, year, or other continents. Multiple continents may be visible together. **Reset** restores all five groups. The default PNG is saved to `charts/partC_default.png` before the window opens.
+**Controls:** each mode checkbox hides or restores that mode's line; it does not change the data, dates, scale, or other modes. The categories are exclusive, but the fares are journeys, not vehicle boardings. **Reset: all modes** restores the initial view. `partC_default.png` is saved before any interaction.
 
-**Wrong conclusion to guard against:** comparing filtered groups can invite a causal story about income and longevity. The view labels the association as descriptive, keeps the same log scale and year when filtering, and says that the points are countries—not individuals or a causal estimate. The exclusive continent categories do not overlap, and the control does not invite users to sum country counts into a transit-network total.
+**Wrong conclusion to guard against:** a mode filter might invite the reader to add mode-specific fare measures or compare them to route boardings as if they were the same unit. The view presents only blended PKR per journey, labels the measure and period, and does not provide an additive boarding total. Mode categories are mutually exclusive; the default reset is always available.
 
-Run `python weak-7\week7_solution.py --interactive` from the repository root in an environment with a Matplotlib GUI backend. Headless checks and static exports use `python weak-7\week7_solution.py` without the flag.
+Run `python weak-7\partC_interactive.py --interactive` from the repository root in an environment with Matplotlib's Tk backend. The default script run writes a static PNG without opening a window. The full pipeline is `python weak-7\run_week7.py`; append `--interactive` to show the controls after exporting.

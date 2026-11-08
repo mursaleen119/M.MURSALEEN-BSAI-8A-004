@@ -1,17 +1,62 @@
-Week 7 adapted audit — source is the existing data/gapminder.csv
-Rows: 1,704; columns: country, year, pop, continent, lifeExp, gdpPercap
-Dtypes: country=str; year=int64; pop=float64; continent=str; lifeExp=float64; gdpPercap=float64
-Unique country-year keys: 1,704; duplicate keys: 0
-Missing cells: 0
-Countries: 142; continents: Africa, Americas, Asia, Europe, Oceania
-Observation years: 1952–2007 (12 values); year steps: [5]
-Countries with a row-count other than 12: 0; countries missing an expected year: 0
-Non-positive values (invalid for calculations): pop=0, lifeExp=0, gdpPercap=0
-Ranges used in calculations: pop=60,011.000–1,318,683,096.000; lifeExp=23.599–82.603; gdpPercap=241.166–113,523.133
-Division denominators: population is positive (60,011–1,318,683,096); GDP per capita is positive (241.166–113,523.133).
-Join misses: not applicable; no external boundary or transit table is used.
-Geographic audit: not possible; Gapminder has no coordinates or boundary geometry.
-Channel plan: continent is consistently mapped to color and marker shape; year is horizontal position on time charts; life expectancy is vertical position where plotted; population share is vertical position only on its panel.
-Channel conflict check: 0 conflicts under the plan above.
-Palette check: Seaborn's colorblind palette is used, with marker shape as a redundant continent cue. Instructor vizlib.cvd_report() is unavailable in this one-dataset adaptation, so no simulation result is claimed.
-Scope note: transit-specific 14-defect audit, route overlap, drill-down, and normalized district map cannot be reproduced from Gapminder.
+Week 7 Task A — reproducible raw-data audit and cleaning
+Source: UsmarHaider/data-visualization, week7/assignments/data, revision 095acf496b9dd19f448d83ad1220a65f493d9b9d
+Raw source inputs are fetched into ignored weak-7/data/ when absent; raw inputs are never modified or committed.
+
+RAW FILE AUDITS
+district_transit.csv: raw rows=25; dtypes=code:str, district:str, population:int64, households:int64, area_km2:float64, lon:float64, lat:float64, income_pc_usd:int64, stops:int64, road_km:float64, boardings_annual:int64, fare_concession_pct:float64, vehicles_registered:int64
+  Key ['code']: unique=25; duplicate rows=0
+  Missing cells=0
+routes.csv: raw rows=36; dtypes=route_id:str, mode:str, corridor:str, length_km:float64, stops:int64, fleet:int64, districts_served:str, boardings_annual:int64, punctuality_pct:float64, crowding_index:float64, cost_recovery_pct:float64, subsidy_pkr_per_trip:float64
+  Key ['route_id']: unique=36; duplicate rows=0
+  Missing cells=0
+ridership_daily.csv: raw rows=2,159; dtypes=date:str, mode:str, trips_scheduled:int64, trips_operated:int64, trips_on_time:int64, boardings:int64, delay_minutes:int64
+  Key ['date', 'mode']: unique=2,136; duplicate rows=23
+  Missing cells=0
+fare_revenue.csv: raw rows=288; dtypes=month:str, mode:str, ticket_type:str, trips:int64, revenue_pkr:int64
+  Key ['month', 'mode', 'ticket_type']: unique=288; duplicate rows=0
+  Missing cells=0
+regions.geojson: 24 Polygon features; unique code keys=24.
+
+FINDINGS, REPAIRS, AND RECONCILIATION
+District GeoJSON join matches as filed: 22/24; after key repair: 24/24.
+Districts retained=24; out-of-scope D00 removed=1. Residents=57,857,000; households=8,908,512; population including D00 would be 60,747,000.
+District boardings before repair: 907,480,083; after repair: 873,564,130.
+Boardings per 1,000 residents: 4,683–30,655; pooled denominator rate=15,099.
+Concession share repairs=4; valid range after repair=20.9–42.6%.
+Usable road_km values=22/24; -1 codes are missing, not negative road length.
+District non-positive population, households, area, stops, annual boardings, or registered-vehicle counts: 0
+Routes: modes as filed=6, after normalization=4; counts={'BRT': 6, 'Bus': 22, 'Ferry': 4, 'Metro': 4}.
+Route punctuality usable=33/36; valid range=62.9–98.8%.
+Cost recovery zero codes set missing=2; routes with a valid rate=34/36.
+Route invalid ranges: non-positive length/stops/fleet=0; crowding index range=0.40–1.32.
+Route boardings=873,564,820; district register=873,564,130; difference=+690.
+Crediting route boardings to every served district gives 2,704,739,571 (3.096x); routes with >1 district=28/36; mean districts/route=2.56; max=4.
+Route district codes with no GeoJSON feature: none.
+Daily date format: alternate-format rows=385; month-first parser accepts 155 and fails 230; dates are parsed using explicit ISO or day-first formats.
+Exact resubmissions after date normalization=30; rows retained after deduplication=2129.
+Impossible on-time counts (trips_on_time > trips_operated)=7; these rows remain for valid boardings but are excluded from punctuality numerator and denominator.
+Other daily impossibilities: negative counts=0; operated > scheduled=0.
+Filed daily span=2025-04-01 to 2026-09-30; expected date×mode slots=2192; unfiled slots=63; by mode={'BRT': 4, 'Bus': 19, 'Ferry': 22, 'Metro': 18}.
+Longest single-mode no-return streak=14 days, Metro 2026-02-09 to 2026-02-22.
+Slots from 2026-09-22 to 2026-09-30: 18/36; two modes stop filing in the partial final period.
+12-month boardings (2025-09-01–2026-08-31), deduplicated=845,531,940; with resubmissions=864,127,819; inflation=2.20%.
+District annual boardings vs daily-return boardings: 873,564,130 vs 845,531,940; returns account for 96.8%; gaps are unknown, not zero.
+Fare table rows=288: parts=216, published totals=72. Parts reconcile exactly with all 72 published month×mode totals.
+Summing every fare row would equal 200.0% of part journeys and 200.0% of part revenue.
+Fare parts total=934,051,014 journeys and 36,669,953,119 PKR; mean fare=39.3 PKR/journey.
+Boardings ÷ journeys=1.305; these are different units and are never combined on one axis.
+
+DIVISION DENOMINATORS
+District population: min=468,000, max=10,966,000; all positive before boardings-per-resident calculations.
+Daily operated departures: min=170, max=9,428; rate calculations use rows with valid on-time counts.
+Fare journeys: min=56,946, max=16,248,117; all positive.
+
+DASHBOARD CHANNEL PLAN
+channel_conflicts output: {"channels_used": {"hue": ["mode"], "lightness": ["boardings_per_1000_residents"]}, "conflicts": {}, "ok": true, "positional": {"x": ["mode", "month", "quarter"], "y": ["indexed_financial_measure", "network_on_time_pct", "punctuality_change_pp"]}}
+cvd_report palette: {"BRT": "#de8f05", "Bus": "#029e73", "Ferry": "#d55e00", "Metro": "#0173b2"}
+cvd_report output: method=linear RGB deuteranopia approximation; marker shapes also identify modes; minimum simulated RGB distance=0.225; pairs below 0.12=[].
+
+PARAMETER AUDIT
+Punctuality is sum(trips_on_time)/sum(trips_operated), not an average of daily percentages.
+Fare endpoint comparison uses complete months 2025-04 through 2026-08; partial 2026-09 is excluded.
+District choropleth uses equal-area Lambert azimuthal projection centered at 70°E, 30°N; five quantile class breaks: 4,683, 7,068, 9,537, 13,454, 18,223, 30,655.
